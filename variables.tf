@@ -19,3 +19,7 @@ variable "parent_dns_zone" {
 variable "parent_subscription_id" {
   type = string
 }
+
+variable "parent_rg" {
+  type = string
+}

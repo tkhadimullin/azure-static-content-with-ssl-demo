@@ -6,7 +6,7 @@ resource "random_string" "storage_suffix" {
 data "azurerm_dns_zone" "parent_dns_zone" {
   provider            = azurerm.parent
   name                = var.parent_dns_zone
-  resource_group_name = "wiseowls-vpn-server"
+  resource_group_name = var.parent_rg
 }
 
 resource "azurerm_resource_group" "main" {
@@ -23,7 +23,7 @@ resource "azurerm_dns_ns_record" "static" {
   provider            = azurerm.parent
   name                = "static"
   zone_name           = data.azurerm_dns_zone.parent_dns_zone.name
-  resource_group_name = "wiseowls-vpn-server"
+  resource_group_name = var.parent_rg
   ttl                 = 60
   records             = azurerm_dns_zone.static.name_servers
 }
